@@ -19,7 +19,7 @@ extra product features.
 - Protected dashboard and note pages
 - Create, list, view, edit, and delete notes
 - Case-insensitive search across note titles and bodies
-- Empty, no-results, loading, validation, and safe error states
+- Success alerts plus empty, no-results, loading, validation, and safe error states
 - Owner-only note access: one user cannot read or mutate another user's notes
 - Unit tests and optional PostgreSQL integration tests
 
@@ -225,7 +225,7 @@ npm run typecheck
 npm run lint
 ```
 
-The regular suite currently passes 56 tests. Three PostgreSQL ownership tests
+The regular suite currently passes 61 tests. Three PostgreSQL ownership tests
 are skipped when `TEST_DATABASE_URL` is absent.
 
 `npm run test:coverage` generates the coverage artifacts but currently returns a
@@ -290,4 +290,5 @@ missing session migration after identifying the runtime error, retained a
 simple server-only data layer, and required explicit tests for unauthorized and
 cross-user note access. I also changed authentication failures to use generic
 messages rather than exposing account existence or infrastructure errors.
+# note
 # note
