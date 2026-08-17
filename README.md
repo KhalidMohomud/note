@@ -290,16 +290,4 @@ missing session migration after identifying the runtime error, retained a
 simple server-only data layer, and required explicit tests for unauthorized and
 cross-user note access. I also changed authentication failures to use generic
 messages rather than exposing account existence or infrastructure errors.
-
-### Suggestion I rejected
-
-I rejected adding an in-memory login rate limiter. It would appear to work in a
-single local process but would reset on restart and would not coordinate across
-multiple deployed instances. A shared deployment-level or persistent limiter is
-the correct production solution, and that infrastructure was outside the
-assignment scope.
-
-AI-generated suggestions were treated as drafts. Final responsibility for the
-schema, security decisions, application behavior, and explanations remains with
-the developer.
 # note
