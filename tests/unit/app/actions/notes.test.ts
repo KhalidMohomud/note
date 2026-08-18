@@ -54,7 +54,7 @@ describe("note actions", () => {
       title: "Title",
       body: "Body",
     });
-    expect(mocks.redirect).toHaveBeenCalledWith("/notes/8");
+    expect(mocks.redirect).toHaveBeenCalledWith("/notes/8?status=created");
   });
 
   it("does not update a note that is missing or not owned", async () => {
@@ -77,7 +77,7 @@ describe("note actions", () => {
       title: "Updated",
       body: "Body",
     });
-    expect(mocks.redirect).toHaveBeenCalledWith("/notes/9");
+    expect(mocks.redirect).toHaveBeenCalledWith("/notes/9?status=updated");
   });
 
   it("does not delete a note that is missing or not owned", async () => {
@@ -93,7 +93,7 @@ describe("note actions", () => {
     await deleteNoteAction(9, {}, new FormData());
 
     expect(mocks.deleteNote).toHaveBeenCalledWith(9);
-    expect(mocks.redirect).toHaveBeenCalledWith("/dashboard");
+    expect(mocks.redirect).toHaveBeenCalledWith("/dashboard?status=deleted");
   });
 
   it("preserves authentication redirects from every write action", async () => {

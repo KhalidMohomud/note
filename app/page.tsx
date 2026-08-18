@@ -4,14 +4,11 @@ export default function Home() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-slate-50 px-6 text-slate-950">
       <section className="w-full max-w-xl text-center">
-        <p className="text-sm font-medium uppercase tracking-widest text-slate-500">
-          Merhaba Junior Developer Assignment
-        </p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
           Welcome Notes
         </h1>
         <p className="mt-6 text-lg leading-8 text-slate-600">
-          Secure authentication is ready. Sign in or create an account to
+          Sign in or create an account to
           continue.
         </p>
         <div className="mt-8 flex justify-center gap-4">

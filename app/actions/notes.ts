@@ -40,7 +40,7 @@ export async function createNoteAction(
     return { message: "Unable to create the note. Please try again." };
   }
 
-  redirect(`/notes/${noteId}`);
+  redirect(`/notes/${noteId}?status=created`);
 }
 
 export async function updateNoteAction(
@@ -75,7 +75,7 @@ export async function updateNoteAction(
     return { message: "Unable to update the note. Please try again." };
   }
 
-  redirect(`/notes/${validNoteId.data}`);
+  redirect(`/notes/${validNoteId.data}?status=updated`);
 }
 
 export async function deleteNoteAction(
@@ -103,5 +103,5 @@ export async function deleteNoteAction(
     return { message: "Unable to delete the note. Please try again." };
   }
 
-  redirect("/dashboard");
+  redirect("/dashboard?status=deleted");
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { listNotesForCurrentUser } from "@/lib/notes/data";
+import { NoteSuccessAlert } from "../notes/note-success-alert";
 
 const dateFormatter = new Intl.DateTimeFormat("en", {
   dateStyle: "medium",
@@ -10,16 +11,25 @@ const dateFormatter = new Intl.DateTimeFormat("en", {
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string | string[] }>;
+  searchParams: Promise<{
+    q?: string | string[];
+    status?: string | string[];
+  }>;
 }) {
-  const rawQuery = (await searchParams).q;
+  const queryParameters = await searchParams;
+  const rawQuery = queryParameters.q;
   const query =
     typeof rawQuery === "string" ? rawQuery.trim().slice(0, 200) : "";
   const notes = await listNotesForCurrentUser(query);
   const hasSearch = query.length > 0;
+  const successMessage =
+    queryParameters.status === "deleted"
+      ? "Note deleted successfully."
+      : null;
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-12">
+      {successMessage ? <NoteSuccessAlert message={successMessage} /> : null}
       <div className="flex items-center justify-between gap-4">
         <h1 className="text-3xl font-bold tracking-tight">My notes</h1>
         <Link

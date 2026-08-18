@@ -76,4 +76,16 @@ describe("notes search", () => {
       "/notes/22",
     );
   });
+
+  it("shows a success alert after deleting a note", async () => {
+    const page = await DashboardPage({
+      searchParams: Promise.resolve({ status: "deleted" }),
+    });
+
+    render(page);
+
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      "Note deleted successfully.",
+    );
+  });
 });

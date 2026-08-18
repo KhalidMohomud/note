@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { deleteNoteAction } from "@/app/actions/notes";
 import { DeleteNoteButton } from "../delete-note-button";
+import { NoteSuccessAlert } from "../note-success-alert";
 import { getNoteForCurrentUser } from "@/lib/notes/data";
 import { noteIdSchema } from "@/lib/notes/validation";
 
@@ -13,10 +14,13 @@ const dateFormatter = new Intl.DateTimeFormat("en", {
 
 export default async function NotePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ status?: string | string[] }>;
 }) {
   const noteId = noteIdSchema.safeParse((await params).id);
+  const status = (await searchParams).status;
 
   if (!noteId.success) {
     notFound();
@@ -29,9 +33,16 @@ export default async function NotePage({
   }
 
   const deleteAction = deleteNoteAction.bind(null, note.id);
+  const successMessage =
+    status === "created"
+      ? "Note created successfully."
+      : status === "updated"
+        ? "Note updated successfully."
+        : null;
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
+      {successMessage ? <NoteSuccessAlert message={successMessage} /> : null}
       <Link className="text-sm font-medium text-slate-600" href="/dashboard">
         ← Back to notes
       </Link>
